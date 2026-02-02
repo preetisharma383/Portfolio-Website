@@ -5,7 +5,7 @@ Welcome to my personal portfolio website! This project showcases my skills, proj
 ---
 
 ## 🚀 Live Demo
-[Visit My Portfolio](https://your-portfolio-link.com)
+[Visit My Portfolio](https://portfolio-website-woad-psi-68.vercel.app/)
 
 ---
 
@@ -37,5 +37,3 @@ Welcome to my personal portfolio website! This project showcases my skills, proj
   - Figma for design references
 
 ---
-
-## 📂 Project Structure

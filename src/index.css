@@ -28,14 +28,15 @@
     scroll-behavior: smooth;
   }
 
-  button {
-    cursor: pointer;
-  }
-
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
     font-family: "Inter", sans-serif;
+    overflow-x: hidden; /* 🔥 CRITICAL FIX */
+  }
+
+  button {
+    cursor: pointer;
   }
 
   .font-serif {
@@ -69,6 +70,7 @@
 }
 
 @layer utilities {
+  /* Animations */
   @keyframes fade-in {
     from {
       opacity: 0;
@@ -108,6 +110,7 @@
     }
   }
 
+  /* 🔥 MARQUEE */
   @keyframes marquee {
     0% {
       transform: translateX(0);
@@ -125,45 +128,34 @@
     animation: float 4s ease-in-out infinite;
   }
 
+  /* slow (keep if needed) */
   .animate-marquee {
-    animation: marquee 30s linear infinite;
+    animation: marquee 20s linear infinite;
   }
 
-  .animation-delay-100 {
-    animation-delay: 100ms;
+  /* FAST — recommended */
+  .animate-marquee-fast {
+    animation: marquee 6s linear infinite;
   }
 
-  .animation-delay-200 {
-    animation-delay: 200ms;
+  /* VERY FAST — optional */
+  .animate-marquee-faster {
+    animation: marquee 4s linear infinite;
   }
 
-  .animation-delay-300 {
-    animation-delay: 300ms;
-  }
+  /* Delays */
+  .animation-delay-100 { animation-delay: 100ms; }
+  .animation-delay-200 { animation-delay: 200ms; }
+  .animation-delay-300 { animation-delay: 300ms; }
+  .animation-delay-400 { animation-delay: 400ms; }
+  .animation-delay-500 { animation-delay: 500ms; }
+  .animation-delay-600 { animation-delay: 600ms; }
+  .animation-delay-800 { animation-delay: 800ms; }
 
-  .animation-delay-400 {
-    animation-delay: 400ms;
-  }
-
-  .animation-delay-500 {
-    animation-delay: 500ms;
-  }
-
-  .animation-delay-600 {
-    animation-delay: 600ms;
-  }
-
-  .animation-delay-800 {
-    animation-delay: 800ms;
-  }
-
+  /* Animated Border */
   @keyframes animated-border {
-    0% {
-      stroke-dashoffset: 400;
-    }
-    100% {
-      stroke-dashoffset: -550;
-    }
+    0% { stroke-dashoffset: 400; }
+    100% { stroke-dashoffset: -550; }
   }
 
   .group:hover .animated-border-path {

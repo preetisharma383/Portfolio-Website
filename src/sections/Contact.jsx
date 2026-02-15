@@ -45,7 +45,6 @@ export const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setIsLoading(true);
     setSubmitStatus({ type: null, message: "" });
 
@@ -76,7 +75,6 @@ export const Contact = () => {
 
       setFormData({ name: "", email: "", message: "" });
     } catch (err) {
-      console.error("EmailJS error:", err);
       setSubmitStatus({
         type: "error",
         message:
@@ -88,34 +86,41 @@ export const Contact = () => {
   };
 
   return (
-    <section id="contact" className="py-32 relative overflow-hidden">
-      <div className="absolute top-0 left-0 w-full h-full">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/5 rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-highlight/5 rounded-full blur-3xl" />
+    <section
+      id="contact"
+      className="relative overflow-hidden py-20 sm:py-24 lg:py-32"
+    >
+      {/* Background blobs */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute left-1/4 top-1/4 h-72 w-72 sm:h-96 sm:w-96 rounded-full bg-primary/5 blur-3xl" />
+        <div className="absolute bottom-1/4 right-1/4 h-56 w-56 sm:h-64 sm:w-64 rounded-full bg-highlight/5 blur-3xl" />
       </div>
 
-      <div className="container mx-auto px-6 relative z-10">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <span className="text-secondary-foreground text-sm font-medium tracking-wider uppercase">
+        <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-16">
+          <span className="text-xs sm:text-sm font-medium tracking-wider uppercase text-secondary-foreground">
             Get In Touch
           </span>
-          <h2 className="text-4xl md:text-5xl font-bold mt-4 mb-6 text-secondary-foreground">
+
+          <h2 className="mt-4 mb-4 text-3xl sm:text-4xl md:text-5xl font-bold text-secondary-foreground">
             Let's build{" "}
             <span className="font-serif italic font-normal text-white">
               something great.
             </span>
           </h2>
-          <p className="text-muted-foreground">
+
+          <p className="text-sm sm:text-base text-muted-foreground">
             Have an idea, opportunity, or role in mind?  
             Drop a message — I actually reply.
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
+        {/* Content */}
+        <div className="mx-auto grid max-w-5xl gap-8 lg:grid-cols-2 lg:gap-12">
           {/* Form */}
-          <div className="glass p-8 rounded-3xl border border-primary/30">
-            <form className="space-y-6" onSubmit={handleSubmit}>
+          <div className="glass rounded-2xl sm:rounded-3xl border border-primary/30 p-5 sm:p-8">
+            <form className="space-y-5 sm:space-y-6" onSubmit={handleSubmit}>
               <input
                 required
                 placeholder="Your name"
@@ -123,7 +128,7 @@ export const Contact = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, name: e.target.value })
                 }
-                className="w-full px-4 py-3 bg-surface rounded-xl border"
+                className="w-full rounded-lg sm:rounded-xl border bg-surface px-4 py-3 text-sm sm:text-base"
               />
 
               <input
@@ -134,27 +139,37 @@ export const Contact = () => {
                 onChange={(e) =>
                   setFormData({ ...formData, email: e.target.value })
                 }
-                className="w-full px-4 py-3 bg-surface rounded-xl border"
+                className="w-full rounded-lg sm:rounded-xl border bg-surface px-4 py-3 text-sm sm:text-base"
               />
 
               <textarea
                 required
-                rows={5}
                 placeholder="Your message..."
                 value={formData.message}
                 onChange={(e) =>
                   setFormData({ ...formData, message: e.target.value })
                 }
-                className="w-full px-4 py-3 bg-surface rounded-xl border resize-none"
+                className="w-full resize-none rounded-lg sm:rounded-xl border bg-surface px-4 py-3 text-sm sm:text-base min-h-[120px] sm:min-h-[160px]"
               />
 
-              <Button type="submit" size="lg" disabled={isLoading} className="w-full">
-                {isLoading ? "Sending..." : <>Send Message <Send className="w-5 h-5" /></>}
+              <Button
+                type="submit"
+                size="lg"
+                disabled={isLoading}
+                className="w-full gap-2"
+              >
+                {isLoading ? (
+                  "Sending..."
+                ) : (
+                  <>
+                    Send Message <Send className="h-5 w-5" />
+                  </>
+                )}
               </Button>
 
               {submitStatus.type && (
                 <div
-                  className={`p-4 rounded-xl flex gap-3 ${
+                  className={`flex gap-3 rounded-xl p-4 text-sm ${
                     submitStatus.type === "success"
                       ? "bg-green-500/10 text-green-400"
                       : "bg-red-500/10 text-red-400"
@@ -173,35 +188,40 @@ export const Contact = () => {
 
           {/* Info */}
           <div className="space-y-6">
-            <div className="glass p-8 rounded-3xl">
-              <h3 className="text-xl font-semibold mb-6">
+            <div className="glass rounded-2xl sm:rounded-3xl p-5 sm:p-8">
+              <h3 className="mb-6 text-lg sm:text-xl font-semibold">
                 Contact Information
               </h3>
+
               {contactInfo.map((item, i) => (
                 <a
                   key={i}
                   href={item.href}
-                  className="flex gap-4 p-4 rounded-xl hover:bg-surface"
+                  className="flex items-start gap-4 rounded-xl p-4 transition hover:bg-surface"
                 >
-                  <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                    <item.icon className="text-primary" />
+                  <div className="flex h-10 w-10 sm:h-12 sm:w-12 items-center justify-center rounded-xl bg-primary/10">
+                    <item.icon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <div className="text-sm text-muted-foreground">
+                    <div className="text-xs sm:text-sm text-muted-foreground">
                       {item.label}
                     </div>
-                    <div className="font-medium">{item.value}</div>
+                    <div className="text-sm sm:text-base font-medium break-words">
+                      {item.value}
+                    </div>
                   </div>
                 </a>
               ))}
             </div>
 
-            <div className="glass p-8 rounded-3xl border border-primary/30">
-              <div className="flex items-center gap-3 mb-3">
-                <span className="w-3 h-3 bg-green-500 rounded-full animate-pulse" />
-                <span className="font-medium">Open to Opportunities</span>
+            <div className="glass rounded-2xl sm:rounded-3xl border border-primary/30 p-5 sm:p-8">
+              <div className="mb-3 flex items-center gap-3">
+                <span className="h-3 w-3 rounded-full bg-green-500 animate-pulse" />
+                <span className="font-medium text-sm sm:text-base">
+                  Open to Opportunities
+                </span>
               </div>
-              <p className="text-sm text-muted-foreground">
+              <p className="text-xs sm:text-sm text-muted-foreground">
                 Actively seeking full-time roles, internships, and serious freelance work.
               </p>
             </div>
